@@ -1,6 +1,6 @@
 
 
-![](./src/img/capa-readme2.png)
+![](./labefood/src/img/capa-readme2.png)
 
 ---
 
@@ -61,31 +61,32 @@ Este é um projeto de Front-end, baseado em aplicativos de delivery de comida, d
 ## 📷 Prints Páginas
 
 ## HOME e LOGIN
-![](./src/img/home-login.png)
+![](./labefood/src/img/home-login.png)
 
 ## Cadastro Dados e Endereço
-![](./src/img/name-endereco.png)
+![](./labefood/src/img/name-endereco.png)
 
 ## Feed e Feed filtro Busca por nome
-![](./src//img/feed1.0.JPG)
+![](./labefood/src/img/feed1.0.JPG)
 
 ## Feed filtro por tipo de restaurante e mensagem se não ouver nome procurado
-![](./src/img/feed2.0.JPG)
+![](./labefood/src/img/feed2.0.JPG)
 
 ## Feed com pedido em andamento
 
-![](./src/img/feed-banner.png)
+![](./labefood/src/img/feed-banner.png)
 
 ## Carrinho com pedido
-![](./src/img/cart.JPG)
+
+![](./labefood/src/img/cart.JPG)
 
 ## Carrinho vazio
-![](./src/img/cart-vazio.png)
+![](./labefood/src/img/cart-vazio.png)
 
 ## Perfil com histórico
-![](./src/img/perfil.png)
+![](./labefood/src/img/perfil.png)
 
 ## Edição do perfil 
-![](./src/img/edit-profile.JPG)
+![](./labefood/src/img/edit-profile.JPG)
 
 
