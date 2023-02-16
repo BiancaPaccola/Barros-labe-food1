@@ -43,7 +43,7 @@ Este é um projeto de Front-end, baseado em aplicativos de delivery de comida, d
 ---
 ## 🔗Link para Acessar
 
-- [Ifuture.com](https://hanging-fork.surge.sh/)
+- [Ifuture.com](https://kaput-flesh.surge.sh/)
 
 ---
 
