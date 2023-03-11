@@ -1,19 +1,11 @@
-
-
 export const CardCart = ({
   image,
   title,
   description,
-  price,
-  quantity,
-  onClickProduct
+  price
 }) => {
-
-
   return (
-
     <>
-
       <div className="image">
         <img src={image} alt="" />
       </div>
@@ -23,10 +15,7 @@ export const CardCart = ({
           <p>{description}</p>
           <p>{price ? `R$${price}` : ``}</p>
         </div>
-
-
       </div>
-
     </>
   );
 };

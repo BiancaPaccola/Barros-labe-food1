@@ -1,6 +1,5 @@
 import styled from "styled-components"
 
-
 export const ProfileContainer = styled.main`
     display: flex;
     justify-content: flex-start;

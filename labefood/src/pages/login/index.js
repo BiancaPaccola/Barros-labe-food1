@@ -1,21 +1,15 @@
 import { LoginPageContainer } from "./style";
 import logo from "../../components/assets/logo.svg";
 import { EmailInput, PasswordInput } from "../../components/inputs";
-import {
-  Button,
-
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "../../hooks/use-form";
 import * as Coordinator from "../../routes/coordinator";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useProtectPage } from "../../hooks/useProtectPage";
 import { BASE_URL, appName } from "../../constants/index.js";
 
-
 export const LoginPage = () => {
-  useProtectPage();
   const navigate = useNavigate();
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -27,26 +21,23 @@ export const LoginPage = () => {
 
   const onClick = () => navigate("/feed");
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     axios
       .post(`${BASE_URL}/${appName}/login`, form)
       .then((response) => {
-        onClick();
-        localStorage.setItem("token", response.data.token);
+        response.data.token &&
+          localStorage.setItem("token", response.data.token);
       })
+      .then(() => onClick())
       .catch((erro) => {
-        console.log("Deu erro!");
         alert("Acesso invalido");
       });
-
-    // clearInputs();
   };
 
   const onClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
 
   return (
     <LoginPageContainer>

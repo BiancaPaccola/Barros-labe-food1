@@ -1,15 +1,9 @@
-import {
-  useNumberInput,
-  Button,
-  Input,
-  HStack,
-} from "@chakra-ui/react";
+import { useNumberInput, Button, Input, HStack } from "@chakra-ui/react";
 import { useContext } from "react";
 import { CartContext } from "../../context/Context";
 
-
-export function HookUsage({handleSubmit}) {
-  const {quantities, setQuantities} = useContext(CartContext);
+export function HookUsage({ handleSubmit }) {
+  const { quantities, setQuantities } = useContext(CartContext);
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       step: 1,
@@ -24,26 +18,18 @@ export function HookUsage({handleSubmit}) {
   const input = getInputProps();
 
   const handleClick = () => {
-    setQuantities(input.value)
-  }
+    setQuantities(input.value);
+  };
 
   return (
     <>
       <form onClick={handleSubmit}>
         <HStack maxW="320px">
-          <Button {...inc}>
-            +
-          </Button>
+          <Button {...inc}>+</Button>
           <Input {...input} />
-          <Button {...dec}>
-            -
-          </Button>
+          <Button {...dec}>-</Button>
         </HStack>
-        <Button
-          onClick={handleClick}
-          colorScheme="blue"
-          variant="ghost"
-        >
+        <Button onClick={handleClick} colorScheme="blue" variant="ghost">
           Adicionar ao carrinho
         </Button>
       </form>

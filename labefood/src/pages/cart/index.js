@@ -5,12 +5,13 @@ import { CardCart } from "../../components/card";
 import { useContext } from "react";
 import { CartContext } from "../../context/Context";
 import { CardContainer } from "../../components/card/style";
-import { appName, BASE_URL, token } from "../../constants/index";
+import { appName, BASE_URL } from "../../constants/index";
 import axios from "axios";
 import { Footer } from "../../components/footer/Footer";
 import { useProtectPage } from "../../hooks/useProtectPage";
 
 export const CartPage = () => {
+  const token = localStorage.getItem('token')
   const [cart, setCart] = useState(false);
   const { states, setStates, restInfo } = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState();
@@ -21,11 +22,15 @@ export const CartPage = () => {
     states.filter((item) => {
       return item.quantity > 0;
     })
-  );
-  useProtectPage()
- 
-
-  let products =
+    );
+    useProtectPage();
+    
+    useEffect(() => {
+      getAddress();
+    }, [address, setAddress, token]);
+    
+    
+    let products =
     cartProducts &&
     cartProducts.map((item) => {
       return { id: item.id, quantity: item.quantity };
@@ -36,24 +41,18 @@ export const CartPage = () => {
     paymentMethod: paymentMethodRadio,
   };
 
-
-
-  const getAddress = () => {
-    axios
+  const getAddress = async () => {
+    await axios
       .get(`${BASE_URL}/${appName}/profile/address`, {
         headers: { auth: token },
       })
       .then((response) => {
-        if (response.data.address) {
-          setAddress(response.data.address);
-        }
+         response.data.address && setAddress(response.data.address);
       })
       .catch((err) => {
         console.log(err.response);
       });
   };
-
-
 
   const placeOrder = () => {
     axios.post(`${BASE_URL}/${appName}/restaurants/${restInfo.id}/order`, body, {
@@ -65,7 +64,6 @@ export const CartPage = () => {
       })
       .catch((err) => {
         alert("Já possui pedido em andamento, POR FAVOR AGUARDE!");
-        console.log(err.response);
       })
   }
 
@@ -83,9 +81,6 @@ export const CartPage = () => {
    
   }, [cart]);
 
-  useEffect(() => {
-    getAddress();
-  }, []);
 
   useEffect(() => {
     if (cartProducts.length > 0) {

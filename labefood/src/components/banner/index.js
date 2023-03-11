@@ -1,8 +1,6 @@
 import { BannerContainer } from "./style"
 import clock from '../assets/clock.svg'
 
-
-
 export const Banner = (props) => {
     return (
       <BannerContainer>
