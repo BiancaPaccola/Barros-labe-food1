@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Main = styled.main`
   height: 100%;
   min-height: 100%;
+  margin: 0 auto;
 `;
 
 export const Span = styled.span`
@@ -55,6 +56,7 @@ export const Card = styled.div`
   padding: 0 0 0;
   border-radius: 8px;
   border: solid 1px #b8b8b8;
+  margin-bottom: 1rem;
 
   img {
     width: 20.5rem;

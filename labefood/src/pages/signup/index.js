@@ -17,7 +17,7 @@ import { BASE_URL } from "../../constants";
 
 export const SignupPage = () => {
   const navigate = useNavigate();
-  const [form, onChange, clearInputs] = useForm({
+  const [form, onChange] = useForm({
     name: "",
     email: "",
     cpf: "",

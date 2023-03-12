@@ -1,5 +1,5 @@
 import { CartContainer } from "./style";
-import { Stack, Radio, RadioGroup, Button } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { useState, useEffect, useCallback } from "react";
 import { CardCart } from "../../components/card";
 import { useContext } from "react";
@@ -9,33 +9,34 @@ import { appName, BASE_URL } from "../../constants/index";
 import axios from "axios";
 import { Footer } from "../../components/footer/Footer";
 import { useProtectPage } from "../../hooks/useProtectPage";
+import { RadioGroupCart } from "../../components/radioGroupCart/radioGroupCart";
 
 export const CartPage = () => {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem("token");
   const [cart, setCart] = useState(false);
   const { states, setStates, restInfo } = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState();
   const [address, setAddress] = useState({});
-  const [paymentMethodRadio, setPaymentMethodRadio] = useState(undefined)
+  const [paymentMethodRadio, setPaymentMethodRadio] = useState(undefined);
   const [cartProducts, setCartProducts] = useState(
     states &&
-    states.filter((item) => {
-      return item.quantity > 0;
-    })
-    );
-    useProtectPage();
-    
-    useEffect(() => {
-      getAddress();
-    }, [address, setAddress, token]);
-    
-    
-    let products =
+      states.filter((item) => {
+        return item.quantity > 0;
+      })
+  );
+
+  useProtectPage();
+
+  useEffect(() => {
+    getAddress();
+  }, [address, setAddress, token]);
+
+  let products =
     cartProducts &&
     cartProducts.map((item) => {
       return { id: item.id, quantity: item.quantity };
     });
-  
+
   const body = {
     products: products,
     paymentMethod: paymentMethodRadio,
@@ -47,7 +48,7 @@ export const CartPage = () => {
         headers: { auth: token },
       })
       .then((response) => {
-         response.data.address && setAddress(response.data.address);
+        response.data.address && setAddress(response.data.address);
       })
       .catch((err) => {
         console.log(err.response);
@@ -55,32 +56,29 @@ export const CartPage = () => {
   };
 
   const placeOrder = () => {
-    axios.post(`${BASE_URL}/${appName}/restaurants/${restInfo.id}/order`, body, {
-      headers: { auth: token }
-    })
+    axios
+      .post(`${BASE_URL}/${appName}/restaurants/${restInfo.id}/order`, body, {
+        headers: { auth: token },
+      })
       .then((response) => {
-        alert('Pedido realizado com sucesso!')
-      
+        alert("Pedido realizado com sucesso!");
       })
       .catch((err) => {
         alert("Já possui pedido em andamento, POR FAVOR AGUARDE!");
-      })
-  }
+      });
+  };
 
   const onClickProduct = useCallback((produto) => {
     produto.quantity = 0;
-    cartProducts.splice(cartProducts.indexOf(produto), 1)
-    setCart(!cart)
+    cartProducts.splice(cartProducts.indexOf(produto), 1);
+    setCart(!cart);
   });
 
   useEffect(() => {
     if (cartProducts.length > 0) {
-
       setCartProducts([...cartProducts]);
     }
-   
   }, [cart]);
-
 
   useEffect(() => {
     if (cartProducts.length > 0) {
@@ -109,11 +107,17 @@ export const CartPage = () => {
                   address.number !== undefined ? address.number : ""
                 }, ${
                   address.complement !== undefined ? address.complement : ""
-                } ${address.neighbourhood !== undefined ? " - " + address.neighbourhood : ""}`
+                } ${
+                  address.neighbourhood !== undefined
+                    ? " - " + address.neighbourhood
+                    : ""
+                }`
               : `${address.street !== undefined ? address.street : ""} ${
                   address.number !== undefined ? ", " + address.number : ""
                 } ${
-                  address.neighbourhood !== undefined ? " - " + address.neighbourhood : ""
+                  address.neighbourhood !== undefined
+                    ? " - " + address.neighbourhood
+                    : ""
                 }`}
           </p>
         </div>
@@ -134,26 +138,8 @@ export const CartPage = () => {
         </div>
         <span className="line"></span>
 
-        <RadioGroup width="85vw">
-          <Stack direction="column">
-            <Radio
-              value="money"
-              onChange={(e) => {
-                setPaymentMethodRadio(e.target.value);
-              }}
-            >
-              Dinheiro
-            </Radio>
-            <Radio
-              value="creditcard"
-              onChange={(e) => {
-                setPaymentMethodRadio(e.target.value);
-              }}
-            >
-              Cartão de crédito
-            </Radio>
-          </Stack>
-        </RadioGroup>
+        <RadioGroupCart setPaymentMethodRadio={setPaymentMethodRadio} />
+
         <div className="submit-button">
           <Button
             type="submit"
@@ -252,26 +238,8 @@ export const CartPage = () => {
         </div>
         <span className="line"></span>
 
-        <RadioGroup width="85vw">
-          <Stack direction="column">
-            <Radio
-              value="money"
-              onChange={(e) => {
-                setPaymentMethodRadio(e.target.value);
-              }}
-            >
-              Dinheiro
-            </Radio>
-            <Radio
-              value="creditcard"
-              onChange={(e) => {
-                setPaymentMethodRadio(e.target.value);
-              }}
-            >
-              Cartão de crédito
-            </Radio>
-          </Stack>
-        </RadioGroup>
+        <RadioGroupCart setPaymentMethodRadio={setPaymentMethodRadio} />
+
         <div className="submit-button">
           <Button
             type="submit"

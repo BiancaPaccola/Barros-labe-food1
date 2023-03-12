@@ -4,7 +4,7 @@ import { useProtectPage } from "../../hooks/useProtectPage";
 import { BASE_URL, appName } from "../../constants/index";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../../components/footer/Footer";
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import { TabListFeed } from "../../components/tabList";
 import {
   Span,
   ConteinerInput,
@@ -105,39 +105,6 @@ export const FeedPage = () => {
         );
       });
 
-  const dataTab = () => {
-    return (
-      <>
-        <Tabs colorScheme="red" onChange={(index) => setTabIndex(index)}>
-          <TabList overflowX="auto">
-            <Tab>Todos</Tab>
-            <Tab>Árabe</Tab>
-            <Tab>Asiática</Tab>
-            <Tab>Baiana</Tab>
-            <Tab>Carnes</Tab>
-            <Tab>Hambúrguer</Tab>
-            <Tab>Italiana</Tab>
-            <Tab>Mexicana</Tab>
-            <Tab>Petiscos</Tab>
-            <Tab>Sorvetes</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-            <TabPanel>{restaurantesFeed}</TabPanel>
-          </TabPanels>
-        </Tabs>
-      </>
-    );
-  };
-
   return (
     <Main>
       <Span>
@@ -156,7 +123,11 @@ export const FeedPage = () => {
         </span>
       </ConteinerInput>
 
-      {dataTab()}
+      <TabListFeed
+        setTabIndex={setTabIndex}
+        restaurantesFeed = {restaurantesFeed}
+      />
+      
       {!isLoading && restaurantesFeed.length === 0 && (
         <Erro>Não encontramos :( </Erro>
       )}
