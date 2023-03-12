@@ -103,9 +103,9 @@ export const ProfilePage = () => {
 
         <section>
           {orders &&
-            orders.map((i) => {
+            orders.map((i, index) => {
               return (
-                <CardHistory>
+                <CardHistory key={index}>
                   <p>{i.restaurantName}</p>
                   <h2>
                     {new Date(i.createdAt).toLocaleDateString("pt-br", {

@@ -17,7 +17,7 @@ export const CartPage = () => {
   const { states, setStates, restInfo } = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState();
   const [address, setAddress] = useState({});
-  const [paymentMethodRadio, setPaymentMethodRadio] = useState(undefined);
+  const [paymentMethodRadio, setPaymentMethodRadio] = useState("money");
   const [cartProducts, setCartProducts] = useState(
     states &&
       states.filter((item) => {
@@ -200,8 +200,8 @@ export const CartPage = () => {
             })
             .map((i) => {
               return (
-                <>
-                  <CardContainer key={i.id}>
+                <div key={i.id}>
+                  <CardContainer>
                     <CardCart
                       image={i && i.photoUrl && i.photoUrl}
                       title={i.name}
@@ -222,7 +222,7 @@ export const CartPage = () => {
                       </Button>
                     </div>
                   </CardContainer>
-                </>
+                </div>
               );
             })}
 

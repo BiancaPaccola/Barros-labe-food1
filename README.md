@@ -43,7 +43,7 @@ Este é um projeto de Front-end, baseado em aplicativos de delivery de comida, d
 ---
 ## 🔗Link para Acessar
 
-- [Ifuture.com](https://kaput-flesh.surge.sh/)
+- [Ifuture.com](https://nimble-country.surge.sh/)
 
 ---
 
@@ -89,4 +89,12 @@ Este é um projeto de Front-end, baseado em aplicativos de delivery de comida, d
 ## Edição do perfil 
 ![](./labefood/src/img/edit-profile.JPG)
 
+
+## 🏃‍♀️ Como rodar o projeto localmente
+
+No terminal rodar os seguintes comandos:
+
+- cd labefood/
+- npm install
+- npm start
 

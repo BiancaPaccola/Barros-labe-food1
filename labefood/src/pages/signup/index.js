@@ -124,6 +124,7 @@ export const SignupPage = () => {
           showPassword={showPassword}
           handleClick={handleClickEye}
           errorMessage={"Mínimo de 6 caracteres..."}
+          autocomplete="on"
         />
 
         <PasswordInput
@@ -135,6 +136,7 @@ export const SignupPage = () => {
           showPassword={showPasswordConfirm}
           handleClick={handleClickEyeConfirm}
           errorMessage={"Deve ser a mesma que a anterior!"}
+          autocomplete="on"
         />
 
         <Button type="submit" colorScheme="red" variant="solid">

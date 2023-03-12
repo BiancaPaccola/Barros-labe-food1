@@ -61,6 +61,7 @@ export const LoginPage = () => {
           showPassword={showPassword}
           handleClick={onClickShowPassword}
           errorMessage={"Senha invalida"}
+          autocomplete="on"
         />
         <Button
           type="submit"

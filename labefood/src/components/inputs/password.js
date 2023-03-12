@@ -30,6 +30,7 @@ export const PasswordInput = ({
           value={value}
           onChange={onChange}
           size="lg"
+          autocomplete="on"
         />
         <InputRightElement height="100%" width="4.5rem">
           <Button background="none" h="1.75rem" size="lg" onClick={handleClick}>

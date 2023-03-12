@@ -122,9 +122,9 @@ export const RestaurantsPage = () => {
         {states &&
           states.map((i) => {
             return (
-              <>
+              <div key={i.id}>
                 {i.photoUrl && (
-                  <CardContainer key={i.id}>
+                  <CardContainer>
                     <CardCart
                       image={i && i.photoUrl && i.photoUrl}
                       title={i.name}
@@ -179,7 +179,7 @@ export const RestaurantsPage = () => {
                     </div>
                   </CardContainer>
                 )}
-              </>
+              </div>
             );
           })}
       </Cards>
