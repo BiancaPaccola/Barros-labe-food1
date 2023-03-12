@@ -20,7 +20,7 @@ import { Banner } from "../../components/banner";
 
 export const FeedPage = () => {
   useProtectPage();
-  
+
   const [restaurants, setRestaurants] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -69,7 +69,7 @@ export const FeedPage = () => {
     setInput(e.target.value);
   };
 
-  const nomesRestaurantes = [
+  const restNamesList = [
     "Todos",
     "Árabe",
     "Asiática",
@@ -89,12 +89,12 @@ export const FeedPage = () => {
         return input
           ? rest.name.toLowerCase().includes(input.toLowerCase())
           : tabIndex === 0
-          ? rest.category !== 'Todos'
-          : rest.category === nomesRestaurantes[tabIndex]
+          ? rest.category !== "Todos"
+          : rest.category === restNamesList[tabIndex];
       })
-      .map((rest) => {
+      .map((rest, index) => {
         return (
-          <Card onClick={() => goToRestaurants(rest.id)}>
+          <Card key={index} onClick={() => goToRestaurants(rest.id)}>
             <img src={rest.logoUrl} alt="Restaurante" />
             <Restaurant>{rest.name}</Restaurant>
             <Detail>
@@ -125,9 +125,9 @@ export const FeedPage = () => {
 
       <TabListFeed
         setTabIndex={setTabIndex}
-        restaurantesFeed = {restaurantesFeed}
+        restaurantesFeed={restaurantesFeed}
       />
-      
+
       {!isLoading && restaurantesFeed.length === 0 && (
         <Erro>Não encontramos :( </Erro>
       )}

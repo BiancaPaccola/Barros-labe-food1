@@ -62,6 +62,8 @@ export const CartPage = () => {
       })
       .then((response) => {
         alert("Pedido realizado com sucesso!");
+        setStates([])
+
       })
       .catch((err) => {
         alert("Já possui pedido em andamento, POR FAVOR AGUARDE!");
