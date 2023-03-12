@@ -23,15 +23,10 @@ import {
 } from "@chakra-ui/react";
 import { CardContainer } from "../../components/card/style";
 
-
 export const RestaurantsPage = () => {
-
- 
-
   const { states, setStates, restInfo, setRestInfo } = useContext(CartContext);
 
   useProtectPage();
-
   const navigate = useNavigate();
   const parametro = useParams();
   const token = localStorage.getItem("token");
@@ -127,9 +122,9 @@ export const RestaurantsPage = () => {
         {states &&
           states.map((i) => {
             return (
-              <>
+              <div key={i.id}>
                 {i.photoUrl && (
-                  <CardContainer key={i.id}>
+                  <CardContainer>
                     <CardCart
                       image={i && i.photoUrl && i.photoUrl}
                       title={i.name}
@@ -184,7 +179,7 @@ export const RestaurantsPage = () => {
                     </div>
                   </CardContainer>
                 )}
-              </>
+              </div>
             );
           })}
       </Cards>

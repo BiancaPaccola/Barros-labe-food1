@@ -6,11 +6,7 @@ import axios from "axios";
 import * as Coordinator from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
-
-import {
-  Button, Divider,
-} from "@chakra-ui/react";
-
+import { Button, Divider } from "@chakra-ui/react";
 import {
   CpfInput,
   EmailInput,
@@ -21,7 +17,7 @@ import { BASE_URL } from "../../constants";
 
 export const SignupPage = () => {
   const navigate = useNavigate();
-  const [form, onChange, clearInputs] = useForm({
+  const [form, onChange] = useForm({
     name: "",
     email: "",
     cpf: "",
@@ -40,59 +36,66 @@ export const SignupPage = () => {
 
   useEffect(() => {
     //testes do formulário para não enviar o cadastro incompleto
-    setIsPasswordConfirmValid(passwordConfirm === form.password ? true : false)
-    setIsPasswordValid(true)
-    setIsEmailValid(form.email === "" ? 'true' : /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(form.email));
-    setIsNameValid(form.name === "" ? 'true' : /[A-Za-z]* [A-Za-z]{2,15}$/.test(form.name));
-    setIsCpfValid(form.cpf === "" ? 'true' :
-    /^(\d{3})(\d{3})(\d{3})(\d{2})$/.test(
-        form.cpf
-      )
-    );
-    setIsPasswordValid(form.password === "" ? 'true' : /^.{6,15}$/.test(form.password));
     setIsPasswordConfirmValid(passwordConfirm === form.password ? true : false);
-  },[form, passwordConfirm])
+    setIsPasswordValid(true);
+    setIsEmailValid(
+      form.email === ""
+        ? "true"
+        : /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(form.email)
+    );
+    setIsNameValid(
+      form.name === "" ? "true" : /[A-Za-z]* [A-Za-z]{2,15}$/.test(form.name)
+    );
+    setIsCpfValid(
+      form.cpf === "" ? "true" : /^(\d{3})(\d{3})(\d{3})(\d{2})$/.test(form.cpf)
+    );
+    setIsPasswordValid(
+      form.password === "" ? "true" : /^.{6,15}$/.test(form.password)
+    );
+    setIsPasswordConfirmValid(passwordConfirm === form.password ? true : false);
+  }, [form, passwordConfirm]);
 
   //---Lógica para o 'olho' da senha
   const [showPassword, setShowPassword] = useState(false); //primeira senha
   const handleClickEye = () => setShowPassword(!showPassword);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false); //segunda senha
-  const handleClickEyeConfirm = () => setShowPasswordConfirm(!showPasswordConfirm);
+  const handleClickEyeConfirm = () =>
+    setShowPasswordConfirm(!showPasswordConfirm);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-  if (
-    isEmailValid &&
-    isNameValid &&
-    isCpfValid &&
-    isPasswordValid &&
-    isPasswordConfirmValid
-  ) {
-     //--- Requisição para criar um novo cadastro
-    axios
-      .post(`${BASE_URL}/rappi4A/signup`, form)
-      .then((response) => {
-        Coordinator.goToAdressRegistration(navigate);
-        localStorage.setItem("token", response.data.token);
-      })
-      .catch((error) => {
-        alert(
-          "Erro ao processar sua requisição: " + error.response.data.message
-        );
-      });
-  }
+    if (
+      isEmailValid &&
+      isNameValid &&
+      isCpfValid &&
+      isPasswordValid &&
+      isPasswordConfirmValid
+    ) {
+      //--- Requisição para criar um novo cadastro
+      axios
+        .post(`${BASE_URL}/rappi4A/signup`, form)
+        .then((response) => {
+          Coordinator.goToAdressRegistration(navigate);
+          localStorage.setItem("token", response.data.token);
+        })
+        .catch((error) => {
+          alert(
+            "Erro ao processar sua requisição: " + error.response.data.message
+          );
+        });
+    }
   };
 
   return (
     <SignupContainer>
-
       <button
         className="go-back-button"
         onClick={() => Coordinator.goBack(navigate)}
-      ><FiChevronLeft />
+      >
+        <FiChevronLeft />
       </button>
-<Divider />
+      <Divider />
       <img src={LogoInvert} alt="logo da Future Eats" />
 
       <h2>Cadastrar</h2>
@@ -121,6 +124,7 @@ export const SignupPage = () => {
           showPassword={showPassword}
           handleClick={handleClickEye}
           errorMessage={"Mínimo de 6 caracteres..."}
+          autocomplete="on"
         />
 
         <PasswordInput
@@ -132,12 +136,12 @@ export const SignupPage = () => {
           showPassword={showPasswordConfirm}
           handleClick={handleClickEyeConfirm}
           errorMessage={"Deve ser a mesma que a anterior!"}
+          autocomplete="on"
         />
 
         <Button type="submit" colorScheme="red" variant="solid">
           Criar
         </Button>
-
       </form>
     </SignupContainer>
   );

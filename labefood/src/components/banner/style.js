@@ -12,10 +12,6 @@ export const BannerContainer = styled.div`
   position: fixed;
   bottom: 0;
 
-  .clock {
-
-  }
-
   .info {
     margin: 0 auto;
   }

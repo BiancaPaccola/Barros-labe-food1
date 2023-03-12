@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const MainConteiner = styled.main`
+
   div {
     display: flex;
     justify-content: space-between;
@@ -43,6 +44,10 @@ export const Title = styled.h1`
 `;
 
 export const Detail = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
   img {
     width: 20.5rem;
     height: 7.5rem;

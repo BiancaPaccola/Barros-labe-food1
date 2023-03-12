@@ -24,7 +24,6 @@ export const Router = () =>{
                 <Route path='/profile' element={<ProfilePage/>}/>
                 <Route path='/edit-address' element={<EditAddress/>}/>
                 <Route path='profile/edit-profile' element={<EditProfilePage/>}/>
-
             </Routes>
         </BrowserRouter>
     )
